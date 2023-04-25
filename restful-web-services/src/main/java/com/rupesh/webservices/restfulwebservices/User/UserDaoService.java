@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDaoSource {
+public class UserDaoService {
     private static List<User> users= new ArrayList<>();
     private static int usersCounts=0;
 
@@ -22,7 +22,7 @@ public class UserDaoSource {
     }
     public User findOne(int id){
         Predicate<? super User> predicate= user-> user.getId().equals(id);
-        return  users.stream().filter(predicate).findFirst().get();
+        return  users.stream().filter(predicate).findFirst().orElse(null);
     }
     public User save(User user){
         user.setId(++usersCounts);
